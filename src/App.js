@@ -26,10 +26,10 @@ function App() {
     setMarkedDownText('')
   }
 
-  const handleCopy = (evt) => {
-    navigator.clipboard.writeText(markedDownText)
-    evt.target.focus()
-  }
+  // const handleCopy = (evt) => {
+  //   navigator.clipboard.writeText(markedDownText)
+  //   evt.target.focus()
+  // }
 
   const format = (str) => {
     // formats input by line to maintain new lines
@@ -70,7 +70,7 @@ function App() {
               value={markedDownText}
               style={{ minHeight: 250, minWidth: '100%' }}
             ></TextArea>
-            <Button onClick={handleCopy}>Copy</Button>
+            {/* <Button onClick={handleCopy}>Copy</Button> */}
           </Grid.Column>
         </Grid.Row>
       </Grid>
