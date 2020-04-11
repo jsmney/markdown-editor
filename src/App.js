@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { Container, Header, Grid, Form, TextArea } from 'semantic-ui-react'
+import {
+  Container,
+  Header,
+  Grid,
+  Form,
+  TextArea,
+  Button
+} from 'semantic-ui-react'
 import './App.css'
 import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
@@ -12,6 +19,16 @@ function App() {
     // updates input, and formats markdown side of text
     setInput(evt.target.value)
     format(evt.target.value)
+  }
+
+  const handleClear = (evt) => {
+    setInput('')
+    setMarkedDownText('')
+  }
+
+  const handleCopy = (evt) => {
+    navigator.clipboard.writeText(markedDownText)
+    evt.target.focus()
   }
 
   const format = (str) => {
@@ -38,9 +55,22 @@ function App() {
                 onChange={handleChange}
               ></TextArea>
             </Form>
+            <Button onClick={handleClear}>Clear</Button>
           </Grid.Column>
           <Grid.Column>
+            <Header as="h3">Formatted Text Preview</Header>
             <div dangerouslySetInnerHTML={{ __html: markedDownText }}></div>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column></Grid.Column>
+          <Grid.Column>
+            <Header as="h3">Formatted Text as HTML</Header>
+            <TextArea
+              value={markedDownText}
+              style={{ minHeight: 250, minWidth: '100%' }}
+            ></TextArea>
+            <Button onClick={handleCopy}>Copy</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>
